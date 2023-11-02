@@ -34,10 +34,10 @@ module.exports = class InfinitudeSensor {
       .then(currentTemperature => {
         // Update the TemperatureSensor characteristic with the new temperature value
         this.temperatureService.updateCharacteristic(Characteristic.CurrentTemperature, currentTemperature);
-       // this.log(`Outdoor temperature updated to: ${currentTemperature}°C`);
+        this.log.info(`Outdoor temperature updated to: ${currentTemperature}°C`);
       })
       .catch(error => {
-      //  this.log(`Error updating outdoor temperature: ${error}`);
+        this.log.warn(`Error updating outdoor temperature: ${error}`);
       });
   }
 
