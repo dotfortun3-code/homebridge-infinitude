@@ -13,8 +13,8 @@ module.exports = class InfinitudeSensor {
     this.temperatureService = platformAccessory.getService(Service.TemperatureSensor);
     this.bindInformation(platformAccessory.getService(Service.AccessoryInformation));
 
-    // Update the temperature every 2 minutes (120000 milliseconds)
-    setInterval(this.updateTemperature.bind(this), 120000);
+    // Update the temperature based on configuration (default 120000 milliseconds)
+    setInterval(this.updateTemperature.bind(this), this.config.sensorpoll);
 
     // Initial temperature update
     this.updateTemperature();
