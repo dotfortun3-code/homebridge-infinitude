@@ -74,6 +74,12 @@
             "description": "Create outdoor temperature sensor for this system",
             "type": "boolean",
             "default": true
+          },
+          "sensorpoll": {
+            "title": "Sensor Update Time",
+            "description": "Requests Current Temperature Update on set interval in milliseconds",
+            "type": "number",
+            "default": 120000
           }
         }
       }
