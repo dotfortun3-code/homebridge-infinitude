@@ -92,6 +92,12 @@
                         "condition": {
                             "functionBody": "return model.thermostats[arrayIndices].useOutdoorTemperatureSensor === true;"
                         }
+                    },
+                    "useModeSwitches": {
+                        "title": "Configure Mode Switches",
+                        "description": "Creates switch for changing thermostat modes",
+                        "type": "boolean",
+                        "default": false
                     }
                 }
             }
