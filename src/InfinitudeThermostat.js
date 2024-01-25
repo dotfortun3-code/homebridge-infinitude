@@ -236,7 +236,7 @@ module.exports = class InfinitudeThermostat {
       return Characteristic.TargetHeatingCoolingState.OFF;
     } else {
       const systemMode = system.status['mode'][0];
-      this.info.log(`System mode: ${systemMode}`);
+
       switch (systemMode) {
         case 'auto':
           return Characteristic.TargetHeatingCoolingState.AUTO;
