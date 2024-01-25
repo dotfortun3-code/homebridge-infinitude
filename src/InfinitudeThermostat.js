@@ -214,12 +214,15 @@ module.exports = class InfinitudeThermostat {
     const status = await this.client.getZoneStatus(this.zoneId);
 
     switch (status['zoneconditioning'][0]) {
-      case 'idle':
-        return Characteristic.CurrentHeatingCoolingState.OFF;
+      case 'prep_cool':
+      case 'active_cool':
+        return Characteristic.CurrentHeatingCoolingState.COOL;
       case 'active_heat':
+      case 'prep_heat':
         return Characteristic.CurrentHeatingCoolingState.HEAT;
       default:
-        return Characteristic.CurrentHeatingCoolingState.COOL;
+        return Characteristic.CurrentHeatingCoolingState.OFF;
+
     }
   }
 
