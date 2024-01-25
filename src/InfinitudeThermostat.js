@@ -203,7 +203,7 @@ module.exports = class InfinitudeThermostat {
       htsp: this.helper.clamp(this.helper.convertToHomeKit(htsp, tempScale), MIN_HEAT_C, MAX_HEAT_C),
       clsp: this.helper.clamp(this.helper.convertToHomeKit(clsp, tempScale), MIN_COOL_C, MAX_COOL_C),
       currentTemp: currentTemperature,
-      mode: system.config['mode'][0]
+      mode: system.status['mode'][0]
     };
 
     return response;
@@ -236,7 +236,7 @@ module.exports = class InfinitudeThermostat {
       return Characteristic.TargetHeatingCoolingState.OFF;
     } else {
       const systemMode = system.status['mode'][0];
-
+      this.info.log(`System mode: ${systemMode}`);
       switch (systemMode) {
         case 'auto':
           return Characteristic.TargetHeatingCoolingState.AUTO;
