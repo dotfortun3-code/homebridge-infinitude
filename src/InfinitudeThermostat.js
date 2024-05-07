@@ -232,25 +232,20 @@ module.exports = class InfinitudeThermostat {
   }
 
   async getTargetHeatingCoolingState() {
-    const system = await this.client.getSystem()
-    var zone = system.status['zones'][0]['zone'].find(zone => zone['id'] === this.zoneId);
+    const system = await this.client.getSystem();
+    const systemMode = system.config['mode'][0];
 
-    if (zone['hold'][0] == 'on' && zone['currentActivity'][0] == 'away') {
-      return Characteristic.TargetHeatingCoolingState.OFF;
-    } else {
-      const systemMode = system.status['mode'][0];
+    switch (systemMode) {
+      case 'auto':
+        return Characteristic.TargetHeatingCoolingState.AUTO;
+      case 'heat':
+      case 'hpheat':
+        return Characteristic.TargetHeatingCoolingState.HEAT;
+      case 'cool':
+        return Characteristic.TargetHeatingCoolingState.COOL;
+      default:
+        return Characteristic.TargetHeatingCoolingState.OFF;
 
-      switch (systemMode) {
-        case 'auto':
-          return Characteristic.TargetHeatingCoolingState.AUTO;
-        case 'heat':
-        case 'hpheat':
-          return Characteristic.TargetHeatingCoolingState.HEAT;
-        case 'cool':
-          return Characteristic.TargetHeatingCoolingState.COOL;
-        default:
-          return Characteristic.TargetHeatingCoolingState.OFF;
-      }
     }
   }
 
